@@ -14,6 +14,10 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class EmpController extends MultiActionController {
 	Logger logger = Logger.getLogger(EmpController.class);
+	private EmpLogic empLogic = null;
+	public void setEmpLogic(EmpLogic empLogic) {
+		this.empLogic = empLogic;
+	}
 	public ModelAndView getEmpList(HttpServletRequest req
 									, HttpServletResponse res) {
 		logger.info("getEmpList 호출 성공");
@@ -26,26 +30,31 @@ public class EmpController extends MultiActionController {
 		List<Map<String, Object>> empList = new ArrayList<>();
 		Map<String, Object> rmap = new HashMap<>();
 		rmap.put("mem_name", "김희태");
+		empList.add(rmap);
+		empList = empLogic.getEmpList();
 		//ModelAndView는 scope속성이 request이다.
 		mav.addObject("empList", empList);
 		mav.setViewName("di/getEmpList");
 		return mav;
 //		return "redirect:getEmpList.jsp"; -- springboot에서 사용
 	}
-	public ModelAndView empInsert(HttpServletRequest req
-			, HttpServletResponse res) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("di/empInsert");
-		return mav;
+//	public ModelAndView empInsert(HttpServletRequest req
+	public void empInsert(HttpServletRequest req
+			, HttpServletResponse res) throws Exception{
+		logger.info("empInsert 호출성공");
+		res.sendRedirect("/di/empInsertOK.jsp");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("di/empInsert");
+//		return mav;
 	}
 	public ModelAndView empUpdate(HttpServletRequest req
-			, HttpServletResponse res) {
+			, HttpServletResponse res) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("di/empUpdate");
 		return mav;
 	}
 	public ModelAndView empDelete(HttpServletRequest req
-			, HttpServletResponse res) {
+			, HttpServletResponse res) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("di/empDelete");
 		return mav;
