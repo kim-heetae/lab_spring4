@@ -2,7 +2,7 @@ package local.di;
 
 import org.springframework.context.annotation.Scope;
 
-@Scope("singletone")
+//@Scope("singletone")
 public class Sonata {
 	private String carColor = null;
 	private int wheelNum = 0;
@@ -23,5 +23,23 @@ public class Sonata {
 		return "자동차 정보 출력하기 ===> carColor : " + this.carColor 
 				+ ", wheelNum : " + this.wheelNum 
 				+ ", speed : " + this.speed;
+	}
+	public String getCarColor() {
+		return carColor;
+	}
+	public void setCarColor(String carColor) {
+		this.carColor = carColor;
+	}
+	public int getWheelNum() {
+		return wheelNum;
+	}
+	public void setWheelNum(int wheelNum) {
+		this.wheelNum = wheelNum;
+	}
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 }
