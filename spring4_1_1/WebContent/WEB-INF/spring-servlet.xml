@@ -15,10 +15,10 @@
 	<bean id = "url-mapping" class = "org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key = "/di/getEmpList.sp4">emp-controller</prop>
-				<prop key = "/di/empInsert.sp4">emp-controller</prop>
-				<prop key = "/di/empUpdate.sp4">emp-controller</prop>
-				<prop key = "/di/empDelete.sp4">emp-controller</prop>
+				<prop key = "/di/getEmpList.sp4">emp-controller</prop> <!-- 웹툰 -->
+				<prop key = "/di/empInsert.sp4">emp-controller</prop> <!-- 게임  -->
+				<prop key = "/di/empUpdate.sp4">emp-controller</prop> <!-- 음식 -->
+				<prop key = "/di/empDelete.sp4">emp-controller</prop><!-- 쇼핑 -->
 			</props>
 		</property>
 	</bean>
@@ -26,8 +26,8 @@
 	<bean id = "emp-resolver" class = "org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key = "/di/getEmpList.sp4">getEmpList</prop>
-				<prop key = "/di/empInsert.sp4">empInsert</prop>
+				<prop key = "/di/getEmpList.sp4">getEmpList</prop> <!-- 웹 -->
+				<prop key = "/di/empInsert.sp4">empInsert</prop> <!-- 요일순 -->
 				<prop key = "/di/empUpdate.sp4">empUpdate</prop>
 				<prop key = "/di/empDelete.sp4">empDelete</prop>
 			</props>
