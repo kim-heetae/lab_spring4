@@ -11,10 +11,15 @@
 		<property name="methodNameResolver" ref = "emp-resolver"/>
 		<property name="empLogic" ref = "emp-logic"/>
 	</bean>
+	<bean id = "board-controller" class = "web.mvc.Board41Controller">
+		<property name="methodNameResolver" ref = "board-resolver"/>
+		<property name="boardLogic" ref = "board-logic"/>
+	</bean>
 	
 	<bean id = "url-mapping" class = "org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
+				<prop key = "/board/getBoardList.sp4">board-controller</prop> <!-- 웹툰 -->
 				<prop key = "/di/getEmpList.sp4">emp-controller</prop> <!-- 웹툰 -->
 				<prop key = "/di/empInsert.sp4">emp-controller</prop> <!-- 게임  -->
 				<prop key = "/di/empUpdate.sp4">emp-controller</prop> <!-- 음식 -->
@@ -23,6 +28,13 @@
 		</property>
 	</bean>
 	
+	<bean id = "board-resolver" class = "org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key = "/board/getBoardList.sp4">boardList</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id = "emp-resolver" class = "org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
