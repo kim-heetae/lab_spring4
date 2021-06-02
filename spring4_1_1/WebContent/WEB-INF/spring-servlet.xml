@@ -20,6 +20,7 @@
 		<property name="mappings">
 			<props>
 				<prop key = "/board/getBoardList.sp4">board-controller</prop> <!-- 웹툰 -->
+				<prop key = "/board/jsonGetBoardList.sp4">board-controller</prop> <!-- 웹툰 -->
 				<prop key = "/di/getEmpList.sp4">emp-controller</prop> <!-- 웹툰 -->
 				<prop key = "/di/empInsert.sp4">emp-controller</prop> <!-- 게임  -->
 				<prop key = "/di/empUpdate.sp4">emp-controller</prop> <!-- 음식 -->
@@ -31,7 +32,8 @@
 	<bean id = "board-resolver" class = "org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key = "/board/getBoardList.sp4">boardList</prop>
+				<prop key = "/board/getBoardList.sp4">getBoardList</prop>
+				<prop key = "/board/jsonGetBoardList.sp4">jsonGetBoardList</prop>
 			</props>
 		</property>
 	</bean>

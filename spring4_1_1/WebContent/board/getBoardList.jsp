@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>getBoardList.jsp 게시판 구현 - webapp</title>
-<jsp:include page="../common/commonUIglobal.jsp" flush= "false"/>
+<%-- <jsp:include page="../common/commonUIglobal.jsp" flush= "false"/> --%>
 </head>
 <body>
 게시판 목록 페이지 입니다. webapp

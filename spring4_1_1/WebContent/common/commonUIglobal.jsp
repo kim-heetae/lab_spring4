@@ -6,8 +6,8 @@
     
     
     <!-- bootstrap시작          -->
-<link rel="stylesheet" type = "text/css" href = "../css/bootstrap.min.css">
-<link rel="stylesheet" type = "text/css" href = "../css/bootstrap-theme.min.css">
+<link rel="stylesheet" type = "text/css" href = "../themes/bootstrap.min.css">
+<link rel="stylesheet" type = "text/css" href = "../themes/bootstrap-theme.min.css">
 
 
     <!-- EasyUI JS시작 -->
