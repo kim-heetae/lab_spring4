@@ -19,12 +19,12 @@
 	<bean id = "url-mapping" class = "org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key = "/board/getBoardList.sp4">board-controller</prop> <!-- 웹툰 -->
-				<prop key = "/board/jsonGetBoardList.sp4">board-controller</prop> <!-- 웹툰 -->
-				<prop key = "/di/getEmpList.sp4">emp-controller</prop> <!-- 웹툰 -->
-				<prop key = "/di/empInsert.sp4">emp-controller</prop> <!-- 게임  -->
-				<prop key = "/di/empUpdate.sp4">emp-controller</prop> <!-- 음식 -->
-				<prop key = "/di/empDelete.sp4">emp-controller</prop><!-- 쇼핑 -->
+				<prop key = "/board/getBoardList.sp4">board-controller</prop>
+				<prop key = "/board/jsonGetBoardList.sp4">board-controller</prop>
+				<prop key = "/di/getEmpList.sp4">emp-controller</prop>
+				<prop key = "/di/empInsert.sp4">emp-controller</prop> 
+				<prop key = "/di/empUpdate.sp4">emp-controller</prop>
+				<prop key = "/di/empDelete.sp4">emp-controller</prop>
 			</props>
 		</property>
 	</bean>

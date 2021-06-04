@@ -12,6 +12,8 @@ public class BoardMVO {
 	 int 		bm_pos     = 0;
 	 int 		bm_step    = 0;
 	 String 	bm_pw      = "";
+	 BoardSVO 	bsVO		= null;
+	 
 	public int getBm_no() {
 		return bm_no;
 	}
@@ -77,5 +79,11 @@ public class BoardMVO {
 	}
 	public void setBm_pw(String bm_pw) {
 		this.bm_pw = bm_pw;
+	}
+	public BoardSVO getBsVO() {
+		return bsVO;
+	}
+	public void setBsVO(BoardSVO bsVO) {
+		this.bsVO = bsVO;
 	}  
 }

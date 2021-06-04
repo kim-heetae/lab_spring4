@@ -47,7 +47,7 @@ public class Board41Controller extends MultiActionController{
 		HashMapBinder hmb = new HashMapBinder(req);
 		Map<String, Object> target = new HashMap<>();
 		hmb.bind(target);
-//		List<Map<String, Object>> boardList = null;
+		List<Map<String, Object>> boardList = null;
 //		boardList = new ArrayList<>();
 //		Map<String, Object> rmap = new HashMap<>();
 //		rmap.put("mem_id", "hit");
@@ -67,13 +67,15 @@ public class Board41Controller extends MultiActionController{
 //		rmap.put("mem_name", "강감찬");
 //		boardList.add(rmap);
 		
-		boardLogic.getBoardList(target);
+		boardList = boardLogic.getBoardList(target);
+		logger.info("boardList : " + boardList);
 		ModelAndView mav = new ModelAndView();
 		String name = "이순신";
 		mav.setViewName("board/getBoardList");
-		mav.addObject("name", name);
-		HttpSession session = req.getSession();
-		session.setAttribute("name", name);
+		mav.addObject("boardList", boardList);
+		logger.info("boardList1 : " + boardList);
+//		HttpSession session = req.getSession();
+//		session.setAttribute("name", name);
 //		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
 //		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
 		
@@ -97,31 +99,33 @@ public class Board41Controller extends MultiActionController{
 		logger.info("Board41Controller - jsongetBoardList 호출성공");
 		
 		List<Map<String, Object>> boardList = null;
-		boardList = new ArrayList<>();
-		Map<String, Object> rmap = new HashMap<>();
-		rmap.put("mem_id", "hit");
-		rmap.put("mem_pw", "123");
-		rmap.put("mem_name", "김희태");
-		boardList.add(rmap);
-		
-		rmap = new HashMap<>();
-		rmap.put("mem_id", "apple");
-		rmap.put("mem_pw", "456");
-		rmap.put("mem_name", "이순신");
-		boardList.add(rmap);
-		
-		rmap = new HashMap<>();
-		rmap.put("mem_id", "tomato");
-		rmap.put("mem_pw", "789");
-		rmap.put("mem_name", "강감찬");
-		boardList.add(rmap);
+		boardList = boardLogic.getBoardList(null);
+//		boardList = new ArrayList<>();
+//		Map<String, Object> rmap = new HashMap<>();
+//		rmap.put("mem_id", "hit");
+//		rmap.put("mem_pw", "123");
+//		rmap.put("mem_name", "김희태");
+//		boardList.add(rmap);
+//		
+//		rmap = new HashMap<>();
+//		rmap.put("mem_id", "apple");
+//		rmap.put("mem_pw", "456");
+//		rmap.put("mem_name", "이순신");
+//		boardList.add(rmap);
+//		
+//		rmap = new HashMap<>();
+//		rmap.put("mem_id", "tomato");
+//		rmap.put("mem_pw", "789");
+//		rmap.put("mem_name", "강감찬");
+//		boardList.add(rmap);
 		
 //		RequestDispatcher view = req.getRequestDispatcher("jsonGetBoardList.jsp");
 //		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
 		Gson gson = new Gson();
 		String imsi = gson.toJson(boardList);
-		res.setContentType("application/json;charset=utf-8");
+		
 		PrintWriter out = res.getWriter();
+		res.setContentType("application/json;charset=utf-8");
 		out.print(imsi);
 	}
 }
