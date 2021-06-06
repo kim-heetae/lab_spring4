@@ -12,7 +12,7 @@
 <jsp:include page="../../../common/commonUIglobal.jsp" flush= "false"/>
 </head>
 <body>
-<table class = "easyui-datagrid" data-options = "url:'./jsonGetBoardList.sp4', title:'게시판-webapp',toolbar:'#tb_board'" style = "width:500px;height:350px">
+<table class = "easyui-datagrid" data-options = "url:'./jsonGetBoardList.sp4', title:'게시판-[WEB-INF]',toolbar:'#tb_board'" style = "width:500px;height:350px">
     <thead>
         <tr>
             <th data-options="field:'BM_NO'">글번호</th>

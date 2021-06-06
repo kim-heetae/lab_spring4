@@ -68,6 +68,7 @@ public class Board41Controller extends MultiActionController{
 //		boardList.add(rmap);
 		
 		boardList = boardLogic.getBoardList(target);
+//		boardLogic.getBoardList(target);
 		logger.info("boardList : " + boardList);
 		ModelAndView mav = new ModelAndView();
 		String name = "이순신";
@@ -76,8 +77,8 @@ public class Board41Controller extends MultiActionController{
 		logger.info("boardList1 : " + boardList);
 //		HttpSession session = req.getSession();
 //		session.setAttribute("name", name);
-//		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
-//		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
+		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
 		
 //		Gson gson = new Gson();
 //		res.setContentType("application/json;charset=utf-8");
