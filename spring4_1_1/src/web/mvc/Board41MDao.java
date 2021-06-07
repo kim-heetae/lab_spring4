@@ -19,4 +19,11 @@ public class Board41MDao {
 		logger.info("Board41MDao - getBoardList 호출성공 " + boardList);
 		return boardList;
 	}
+	public int boardInsert(Map<String, Object> pmap) {
+		logger.info("boardMDao.boardInsert 호출성공");
+		int result = 0;
+		result = sqlSessionTemplate.insert("boardInsertMaster",pmap);
+		
+		return result;
+	}
 }

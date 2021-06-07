@@ -9,6 +9,14 @@
            board_sub2019 bs
     WHERE bm.bm_no = bs.bm_no(+)
 	</select>
+	
+	<insert id="boardInsertMaster" parameterType = "map">
+		INSERT INTO board_master2019(bm_no, bm_title, bm_date, bm_hit) VALUES(#{bm_no}, #{bm_title}, #{bm_date}, #{bm_hit})
+	</insert>
+	<insert id="boardInsertSub" parameterType = "map">
+		INSERT INTO board_sub2019(bm_no, bs_file) VALUES(#{bm_no}, #{bs_file})
+	</insert>
+	
 	<select id="test" parameterType="map" resultType="string">
 		select TO_CHAR(sysdate, 'YYYY-MM-DD') from dual
 	</select>

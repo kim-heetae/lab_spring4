@@ -24,9 +24,13 @@
 	}
 	
 	function close(){
+		$('#dg_board').datagrid({			
+			url:'boardInsert.sp4',
+		});
 		console.log("dialog닫기");
 		$('#dlg_ins').dialog('close');
 	}
+	
 </script>
 </head>
 <body>
@@ -60,19 +64,19 @@
 	<!--========================================= 글쓰기 화면 시작 ============================================  -->
 	<div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save',closed:'false'" style="width:600px;height:500px;padding:10px">
     	<div style="margin-bottom:20px">
-            <input class="easyui-textbox" label="글 번호 :" labelPosition="top" data-options="prompt:'Enter a email address...',validType:'email'" style="width:100%;">
+            <input class="easyui-textbox" label="글 번호 :" data-options="field:'BM_NO'" labelPosition="top" style="width:100%;">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" label="글 제목 :" labelPosition="top" style="width:100%;">
+            <input class="easyui-textbox" label="글 제목 :" data-options="field:'BM_TITLE'" labelPosition="top" style="width:100%;">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" label="작성일 :" labelPosition="top" style="width:100%;">
+            <input class="easyui-textbox" label="작성일 :" data-options="field:'BM_DATE'" labelPosition="top" style="width:100%;">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-filebox" label="첨부파일 :" labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
+            <input class="easyui-filebox" label="첨부파일 :" data-options="field:'BS_FILE'" labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" label="조회수 :" labelPosition="top" style="width:100%;">
+            <input class="easyui-textbox" label="조회수 :" data-options="field:'BM_HIT'" labelPosition="top" style="width:100%;">
         </div>
         
         <div>

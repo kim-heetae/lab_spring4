@@ -16,7 +16,7 @@
 
 
     <!-- EasyUI JS시작 -->
-<script type = "text/javascript" src = "<%=path.toString() %>js/jquery.min.js"/></script>
+<script type = "text/javascript" src = "<%=path.toString() %>js/jquery.min.js"></script>
 <script type = "text/javascript" src = "<%=path.toString() %>js/jquery.easyui.min.js"></script>
    
    
