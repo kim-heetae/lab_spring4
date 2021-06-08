@@ -25,10 +25,13 @@ public class Board41Logic {
 
 	public int boardInsert(Map<String, Object> pmap) {
 		int result = 0;
+		int fileOk = 0;
 		logger.info("boardInsert 호출성공");
 		int resultMaster = boardSDao.boardInsert(pmap);
-		int resultSub = boardMDao.boardInsert(pmap);
-		if(resultMaster == 1 && resultSub == 1) {
+		if(pmap.containsKey("bs_file")) {
+			fileOk = boardSDao.boardInsert(pmap);
+		}
+		if(resultMaster == 1 && fileOk == 1) {
 			result = 1;
 		}
 		else {
