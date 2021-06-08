@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function CheckWeight(name, height, weight){
+      this.userName = name;
+      this.userHeight = height;
+      this.userWeight = weight;
+      this.userInfo = function(){
+        let str = "";
+        str += "이름 : " + this.userName + ",";
+        str += "키 : " + this.userHeight + ",";
+        str += "몸무게 : " + this.userWeight + ",";
+      }
+    }
+    const kim = new CheckWeight("김유신", 178, 61);
+    console.log(kim);
+  </script>
+</body>
+</html>
