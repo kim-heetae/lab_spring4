@@ -22,12 +22,12 @@ public class Board41Logic {
 		boardList = boardMDao.getBoardList(pmap);
 		return boardList;
 	}
-
+	//=>board/boardInsert.sp4?bm_no=6&bm_title=게시글제목&bs_file=a.txt&bm_writer=%EC%9D%B4%EC%88%9C%EC%8B%A0&bm_email=test@hot.com&bm_content=%EC%97%B0%EC%8A%B5&bm_pw=123
 	public int boardInsert(Map<String, Object> pmap) {
 		int result = 0;
-		int fileOk = 0;
+		int fileOk = 1;
 		logger.info("boardInsert 호출성공");
-		int resultMaster = boardSDao.boardInsert(pmap);
+		int resultMaster = boardMDao.boardInsert(pmap);
 		if(pmap.containsKey("bs_file")) {
 			fileOk = boardSDao.boardInsert(pmap);
 		}

@@ -11,11 +11,19 @@
 	</select>
 	
 	<insert id="boardInsertMaster" parameterType = "map">
-		INSERT INTO board_master2019(bm_no, bm_title, bm_date, bm_hit) 
-		VALUES(#{bm_no}, #{bm_title}, #{bm_date}, #{bm_hit})
+<!-- 		INSERT INTO board_master2019(bm_no, bm_title, bm_date, bm_hit)  -->
+<!-- 		VALUES(#{bm_no}, #{bm_title}, #{bm_date}, #{bm_hit}) -->
+		
+		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email
+		                           , bm_content, bm_date, bm_group, bm_pos, bm_step, bm_pw) 
+		                      values(#{bm_no},#{bm_title},#{bm_writer},#{bm_email}
+		                           , #{bm_content}, to_char(sysdate, 'YYYY-MM-DD'), 0,0,0,#{bm_pw}
+		                            )
 	</insert>
 	<insert id="boardInsertSub" parameterType = "map">
-		INSERT INTO board_sub2019(bm_no, bs_file, bs_size) VALUES(#{bm_no}, #{bs_file}, #{bs_size})
+<!-- 		INSERT INTO board_sub2019(bm_no, bs_file, bs_size) VALUES(#{bm_no}, #{bs_file}, #{bs_size}) -->
+		
+		INSERT INTO board_sub2019(bm_no,bs_seq,bs_file,bs_size) values(#{bm_no},#{bs_seq},#{bs_file},#{bs_size})
 	</insert>
 	
 	<select id="test" parameterType="map" resultType="string">
