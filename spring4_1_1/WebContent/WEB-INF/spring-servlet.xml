@@ -21,6 +21,8 @@
 			<props>
 				<prop key = "/board/getBoardList.sp4">board-controller</prop>
 				<prop key = "/board/boardInsert.sp4">board-controller</prop>
+				<prop key = "/board/boardUpdate.sp4">board-controller</prop>
+				<prop key = "/board/boardDelete.sp4">board-controller</prop>
 				<prop key = "/board/jsonGetBoardList.sp4">board-controller</prop>
 				<prop key = "/di/getEmpList.sp4">emp-controller</prop>
 				<prop key = "/di/empInsert.sp4">emp-controller</prop> 
@@ -35,6 +37,8 @@
 			<props>
 				<prop key = "/board/getBoardList.sp4">getBoardList</prop>
 				<prop key = "/board/boardInsert.sp4">boardInsert</prop>
+				<prop key = "/board/boardUpdate.sp4">boardUpdate</prop>
+				<prop key = "/board/boardDelete.sp4">boardDelete</prop>
 				<prop key = "/board/jsonGetBoardList.sp4">jsonGetBoardList</prop>
 			</props>
 		</property>

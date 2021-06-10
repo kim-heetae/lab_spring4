@@ -48,48 +48,22 @@ public class Board41Controller extends MultiActionController{
 		Map<String, Object> target = new HashMap<>();
 		hmb.bind(target);
 		List<Map<String, Object>> boardList = null;
-//		boardList = new ArrayList<>();
-//		Map<String, Object> rmap = new HashMap<>();
-//		rmap.put("mem_id", "hit");
-//		rmap.put("mem_pw", "123");
-//		rmap.put("mem_name", "김희태");
-//		boardList.add(rmap);
-//		
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "apple");
-//		rmap.put("mem_pw", "456");
-//		rmap.put("mem_name", "이순신");
-//		boardList.add(rmap);
-//		
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "tomato");
-//		rmap.put("mem_pw", "789");
-//		rmap.put("mem_name", "강감찬");
-//		boardList.add(rmap);
-		
 		boardList = boardLogic.getBoardList(target);
-//		boardLogic.getBoardList(target);
 		logger.info("boardList : " + boardList);
 		ModelAndView mav = new ModelAndView();
-		String name = "이순신";
 		mav.setViewName("board/getBoardList");
 		mav.addObject("boardList", boardList);
 		logger.info("boardList1 : " + boardList);
 //		HttpSession session = req.getSession();
 //		session.setAttribute("name", name);
-		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
-		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
+//		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+//		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
 		
 //		Gson gson = new Gson();
 //		res.setContentType("application/json;charset=utf-8");
 //		String imsi = gson.toJson(target);
 //		PrintWriter out = res.getWriter();
 //		out.print(target);
-		return mav;
-	}
-	public ModelAndView getBoardList() {//파라미터로 req , res가 없기때문에 실행되지 못한다.
-		logger.info("Board41Controller - getBoardList() 호출성공");
-		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 	//json으로 내보내주는 방법 - @RestController:String , @Controller:void or ModelAndView or String
@@ -101,32 +75,13 @@ public class Board41Controller extends MultiActionController{
 		
 		List<Map<String, Object>> boardList = null;
 		boardList = boardLogic.getBoardList(null);
-//		boardList = new ArrayList<>();
-//		Map<String, Object> rmap = new HashMap<>();
-//		rmap.put("mem_id", "hit");
-//		rmap.put("mem_pw", "123");
-//		rmap.put("mem_name", "김희태");
-//		boardList.add(rmap);
-//		
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "apple");
-//		rmap.put("mem_pw", "456");
-//		rmap.put("mem_name", "이순신");
-//		boardList.add(rmap);
-//		
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "tomato");
-//		rmap.put("mem_pw", "789");
-//		rmap.put("mem_name", "강감찬");
-//		boardList.add(rmap);
-		
 //		RequestDispatcher view = req.getRequestDispatcher("jsonGetBoardList.jsp");
 //		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
 		Gson gson = new Gson();
 		String imsi = gson.toJson(boardList);
 		
-		PrintWriter out = res.getWriter();
 		res.setContentType("application/json;charset=utf-8");
+		PrintWriter out = res.getWriter();
 		out.print(imsi);
 	}
 	
@@ -145,5 +100,26 @@ public class Board41Controller extends MultiActionController{
 		else {
 			res.sendRedirect("등록실패 페이지 처리");
 		}
+	}
+	
+	public void boardUpdate(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		logger.info("boardUpdate 호출성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> pmap = new HashMap<>();
+		//사용자가 입력한 값이나 서버에서 클라이언트에게 요청한 값 넘김.
+		hmb.bind(pmap);
+		logger.info("boardUpdate pmap : " + pmap);
+		int result = 0;
+		result = boardLogic.boardUpdate(pmap);		
+		if(result == 1) {
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			res.sendRedirect("등록실패 페이지 처리");
+		}
+	}
+	
+	public void boardDelete(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		
 	}
 }

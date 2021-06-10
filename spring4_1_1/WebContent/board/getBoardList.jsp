@@ -18,7 +18,7 @@
 		});
 	}
 	
-	function insert(){
+	function ins(){
 		console.log("입력 호출");
 		$('#dlg_ins').dialog('open');
 	}
@@ -57,31 +57,31 @@
 	
 	<div id="tb_board2" style="padding:2px 5px;">
 	        <a href="javascript:search()" class="easyui-linkbutton" iconCls="icon-search" plain="true">조회</a>
-	        <a href="javascript:insert()" class="easyui-linkbutton" iconCls="icon-add" plain="true">입력</a>
+	        <a href="javascript:ins()" class="easyui-linkbutton" iconCls="icon-add" plain="true">입력</a>
 	        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true">수정</a>
 	        <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a>
 	</div>
 	<!--========================================= 글쓰기 화면 시작 ============================================  -->
 	<div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save',closed:'false'" style="width:600px;height:500px;padding:10px">
     	<form action="./boardInsert.sp4">
-    	<div style="margin-bottom:20px">
-            <input name="bm_no" class="easyui-textbox" type="number" label="글 번호 :" labelPosition="top" style="width:100%;">
-        </div>
-        <div style="margin-bottom:20px">
-            <input name="bm_title" class="easyui-textbox" label="글 제목 :" labelPosition="top" style="width:100%;">
-        </div>
-        <div style="margin-bottom:20px">
-            <input name="bm_date" class="easyui-textbox" label="작성일 :" labelPosition="top" style="width:100%;">
-        </div>
-        <div style="margin-bottom:20px">
-            <input name="bm_file" class="easyui-filebox" label="첨부파일 :" labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
-        </div>
-        <div style="margin-bottom:20px">
-            <input name="bm_hit" class="easyui-textbox" type="number" label="조회수 :" labelPosition="top" style="width:100%;">
-        </div>
-        <div>
-            <input type="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px">
-        </div>
+	    	<div style="margin-bottom:20px">
+	            <input name="bm_no" class="easyui-textbox" type="number" label="글 번호 :" labelPosition="top" style="width:100%;">
+	        </div>
+	        <div style="margin-bottom:20px">
+	            <input name="bm_title" class="easyui-textbox" label="글 제목 :" labelPosition="top" style="width:100%;">
+	        </div>
+	        <div style="margin-bottom:20px">
+	            <input name="bm_date" class="easyui-textbox" label="작성일 :" labelPosition="top" style="width:100%;">
+	        </div>
+	        <div style="margin-bottom:20px">
+	            <input name="bm_file" class="easyui-filebox" label="첨부파일 :" labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
+	        </div>
+	        <div style="margin-bottom:20px">
+	            <input name="bm_hit" class="easyui-textbox" type="number" label="조회수 :" labelPosition="top" style="width:100%;">
+	        </div>
+	        <div>
+	            <input type="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px">
+	        </div>
     	</form>
         
     </div>

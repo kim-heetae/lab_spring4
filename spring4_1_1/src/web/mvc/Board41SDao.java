@@ -22,4 +22,14 @@ public class Board41SDao {
 		
 		return result;
 	}
+
+	public int boardUpdate(Map<String, Object> pmap) {
+		logger.info("boardMDao.boardUpdate 호출성공");
+		int result = 0;
+		pmap.put("bs_seq", 1);
+		pmap.put("bs_size", 50);
+//		result = sqlSessionTemplate.update("boardUpdateSub",pmap);
+		
+		return result;
+	}
 }

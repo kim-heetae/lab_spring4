@@ -39,4 +39,21 @@ public class Board41Logic {
 		}
 		return result;
 	}
+
+	public int boardUpdate(Map<String, Object> pmap) {
+		int result = 0;
+		int fileOk = 1;
+		logger.info("boardUpdate 호출성공");
+		int resultMaster = boardMDao.boardUpdate(pmap);
+		if(pmap.containsKey("bs_file")) {
+			fileOk = boardSDao.boardUpdate(pmap);
+		}
+		if(resultMaster == 1 && fileOk == 1) {
+			result = 1;
+		}
+		else {
+			result = 0;
+		}
+		return result;
+	}
 }
