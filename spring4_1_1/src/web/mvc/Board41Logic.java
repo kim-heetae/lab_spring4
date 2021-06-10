@@ -25,35 +25,47 @@ public class Board41Logic {
 	//=>board/boardInsert.sp4?bm_no=6&bm_title=게시글제목&bs_file=a.txt&bm_writer=%EC%9D%B4%EC%88%9C%EC%8B%A0&bm_email=test@hot.com&bm_content=%EC%97%B0%EC%8A%B5&bm_pw=123
 	public int boardInsert(Map<String, Object> pmap) {
 		int result = 0;
-		int fileOk = 1;
+		int bm_no = 0;
+		int bm_group = 0;
+		if(pmap.get("bm_group") != null) {
+			bm_group = Integer.parseInt(pmap.get("bm_group").toString());
+		}
+		if(bm_group > 0) {
+			boardMDao.bmStepUpdate(pmap);
+			pmap.put("bm_pos", Integer.parseInt(pmap.get("bm_pos").toString()) + 1);
+			pmap.put("bm_step", Integer.parseInt(pmap.get("bm_step").toString()) + 1);
+		}
+		else {//새글일때
+			bm_group = boardMDao.getBmGroup();
+			pmap.put("bm_group", bm_group);
+			pmap.put("bm_pos", 0);
+			pmap.put("bm_step", 0);
+		}
+		if((pmap.get("bs_file") != null) && (pmap.get("bs_file").toString().length() > 0)) {
+			pmap.put("bm_no", bm_no);
+			pmap.put("bm_seq", 1);
+			boardSDao.boardInsert(pmap);
+		}
 		logger.info("boardInsert 호출성공");
 		int resultMaster = boardMDao.boardInsert(pmap);
-		if(pmap.containsKey("bs_file")) {
-			fileOk = boardSDao.boardInsert(pmap);
-		}
-		if(resultMaster == 1 && fileOk == 1) {
 			result = 1;
-		}
-		else {
-			result = 0;
-		}
 		return result;
 	}
 
-	public int boardUpdate(Map<String, Object> pmap) {
-		int result = 0;
-		int fileOk = 1;
-		logger.info("boardUpdate 호출성공");
-		int resultMaster = boardMDao.boardUpdate(pmap);
-		if(pmap.containsKey("bs_file")) {
-			fileOk = boardSDao.boardUpdate(pmap);
-		}
-		if(resultMaster == 1 && fileOk == 1) {
-			result = 1;
-		}
-		else {
-			result = 0;
-		}
-		return result;
-	}
+//	public int boardUpdate(Map<String, Object> pmap) {
+//		int result = 0;
+//		int fileOk = 1;
+//		logger.info("boardUpdate 호출성공");
+//		int resultMaster = boardMDao.boardUpdate(pmap);
+//		if(pmap.containsKey("bs_file")) {
+//			fileOk = boardSDao.boardUpdate(pmap);
+//		}
+//		if(resultMaster == 1 && fileOk == 1) {
+//			result = 1;
+//		}
+//		else {
+//			result = 0;
+//		}
+//		return result;
+//	}
 }

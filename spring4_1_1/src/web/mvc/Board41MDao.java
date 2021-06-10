@@ -26,11 +26,14 @@ public class Board41MDao {
 		
 		return result;
 	}
-	public int boardUpdate(Map<String, Object> pmap) {
-		logger.info("boardMDao.boardUpdate 호출성공");
+	public void bmStepUpdate(Map<String, Object> pmap) {
+		logger.info("boardMDao.boardInsert 호출성공");
 		int result = 0;
-//		result = sqlSessionTemplate.update("boardUpdateMaster",pmap);
-		
+		result = sqlSessionTemplate.update("bmStepUpdate",pmap);
+	}
+	public int getBmGroup() {
+		int result = 0;
+		result = sqlSessionTemplate.selectOne("getBmGroup");
 		return result;
 	}
 }
