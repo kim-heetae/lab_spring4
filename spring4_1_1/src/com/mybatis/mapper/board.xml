@@ -8,24 +8,30 @@
 <!--     FROM board_master2019 bm, -->
 <!--            board_sub2019 bs -->
 <!--     WHERE bm.bm_no = bs.bm_no(+) -->
-      SELECT bm.bm_no, bm.bm_title, bm.bm_date, NVL(bs.bs_file,'해당없음') bs_file, bm.bm_hit
+<!--       SELECT bm.bm_no, bm.bm_title, bm.bm_date, NVL(bs.bs_file,'해당없음') bs_file, bm.bm_hit -->
+<!--       SELECT * -->
+      SELECT bm.bm_no,  bm.bm_title, bm.bm_date, NVL(bs.bs_file,'해당없음') bs_file, bm.bm_hit, 
+      	 bm.bm_group, bm.bm_pos, bm.bm_step, bm.bm_email, bm.bm_writer, bm.bm_pw, bm.bm_content
       FROM board_master2019 bm, board_sub2019 bs 
       WHERE bm.bm_no = bs.bm_no(+)
     <if test = 'cb_search!=null and cb_search.equals("bm_title")'>
     	AND bm.bm_title LIKE '%'||#{tb_search}||'%'
     </if>
+    <if test = 'bm_no > 0'>
+    	AND bm.bm_no = #{bm_no}
+    </if>
     	ORDER BY bm_group desc, bm_step asc
 	</select>
 	
 	<insert id="boardInsertMaster" parameterType = "map">
-		INSERT INTO board_master2019(bm_no, bm_title, bm_date, bm_hit) 
-		VALUES(#{bm_no}, #{bm_title}, #{bm_date}, #{bm_hit})
+<!-- 		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email, bm_content, bm_hit, bm_date,bm_group, bm_pos, bm_step, bm_pw)  -->
+<!-- 		VALUES(#{bm_no}, #{bm_title}, #{bm_date}, #{bm_hit}) -->
 		
-<!-- 		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email -->
-<!-- 		                           , bm_content, bm_date, bm_group, bm_pos, bm_step, bm_pw)  -->
-<!-- 		                      values(#{bm_no},#{bm_title},#{bm_writer},#{bm_email} -->
-<!-- 		                           , #{bm_content}, to_char(sysdate, 'YYYY-MM-DD'), 0,0,0,#{bm_pw} -->
-<!-- 		                            ) -->
+		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email
+		                           , bm_content, bm_hit, bm_date, bm_group, bm_pos, bm_step, bm_pw) 
+		                      values(#{bm_no},#{bm_title},#{bm_writer},#{bm_email}
+		                           , #{bm_content}, 0, to_char(sysdate, 'YYYY-MM-DD'), 0,0,0,#{bm_pw}
+		                            )
 	</insert>
 	<insert id="boardInsertSub" parameterType = "map">
 		INSERT INTO board_sub2019(bm_no, bs_file, bs_size) VALUES(#{bm_no}, #{bs_file}, #{bs_size})

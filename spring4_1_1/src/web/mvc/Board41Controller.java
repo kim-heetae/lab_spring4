@@ -58,12 +58,23 @@ public class Board41Controller extends MultiActionController{
 //		session.setAttribute("name", name);
 //		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
 //		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
-		
-//		Gson gson = new Gson();
-//		res.setContentType("application/json;charset=utf-8");
-//		String imsi = gson.toJson(target);
-//		PrintWriter out = res.getWriter();
-//		out.print(target);
+		return mav;
+	}
+	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res) 
+			throws Exception
+	{
+		logger.info("Board41Controller - getBoardDetail(req, res) 호출성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> target = new HashMap<>();
+		hmb.bind(target);
+		logger.info("bm_no : " + target.get("bm_no"));
+		List<Map<String, Object>> boardDetail = null;
+		boardDetail = boardLogic.getBoardList(target);
+		logger.info("boardDetail : " + boardDetail);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/read");
+		mav.addObject("boardDetail", boardDetail);
+		logger.info("boardDetail : " + boardDetail);
 		return mav;
 	}
 	//json으로 내보내주는 방법 - @RestController:String , @Controller:void or ModelAndView or String

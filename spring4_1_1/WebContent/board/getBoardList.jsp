@@ -65,20 +65,23 @@
 	<div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save',closed:'false'" style="width:600px;height:500px;padding:10px">
     	<form action="./boardInsert.sp4">
 	    	<div style="margin-bottom:20px">
-	            <input name="bm_no" class="easyui-textbox" type="number" label="글 번호 :" labelPosition="top" style="width:100%;">
+	            <input name="bm_title" class="easyui-textbox" label="제목" labelPosition="top" style="width:100%;">
 	        </div>
 	        <div style="margin-bottom:20px">
-	            <input name="bm_title" class="easyui-textbox" label="글 제목 :" labelPosition="top" style="width:100%;">
+	            <input name="bm_writer" class="easyui-textbox" label="작성자" labelPosition="top" style="width:100%;">
 	        </div>
 	        <div style="margin-bottom:20px">
-	            <input name="bm_date" class="easyui-textbox" label="작성일 :" labelPosition="top" style="width:100%;">
+	            <input name="bm_email" class="easyui-textbox" label="email" labelPosition="top"  data-options="prompt:'Enter a email address...',validType:'email'" style="width:100%;">
 	        </div>
 	        <div style="margin-bottom:20px">
-	            <input name="bm_file" class="easyui-filebox" label="첨부파일 :" labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
+	            <input name="bm_content" class="easyui-textbox" label="내용" labelPosition="top" multiline="true" style="width:100%;height:100px">
 	        </div>
 	        <div style="margin-bottom:20px">
-	            <input name="bm_hit" class="easyui-textbox" type="number" label="조회수 :" labelPosition="top" style="width:100%;">
+	            <input name="bs_file" class="easyui-filebox" label="첨부파일" labelPosition="top" style="width:100%;">
 	        </div>
+	        <div style="margin-bottom:20px">
+            	<input name="bm_pw" class="easyui-passwordbox" label = "비밀번호" labelPosition="top" prompt="Password" iconWidth="28" style="width:100%">
+        	</div>
 	        <div>
 	            <input type="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px">
 	        </div>
