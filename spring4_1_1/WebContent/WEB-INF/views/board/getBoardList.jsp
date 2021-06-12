@@ -12,7 +12,7 @@
 	}
 	out.print("size : " + size);
 	
-%> 
+%>           
 <!DOCTYPE html>
 <html>
 <head>
