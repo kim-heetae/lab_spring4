@@ -31,6 +31,11 @@ public class Board41MDao {
 		int result = 0;
 		result = sqlSessionTemplate.update("bmStepUpdate",pmap);
 	}
+	public void hitCount(Map<String, Object> pmap) {
+		logger.info("boardMDao.boardInsert 호출성공");
+		int result = 0;
+		result = sqlSessionTemplate.update("hitCount",pmap);
+	}
 	public int getBmGroup() {
 		int result = 0;
 		result = sqlSessionTemplate.selectOne("getBmGroup");

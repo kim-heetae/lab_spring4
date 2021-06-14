@@ -23,16 +23,16 @@ String rb_group = null;
 String rb_pos = null;
 String rb_step = null;
 if (boardDetail != null && boardDetail.size() > 0) {
-	rb_email = boardDetail.get(0).get("BM_EMAIL").toString();
-	rb_file = boardDetail.get(0).get("BS_FILE").toString();
-	rb_title = boardDetail.get(0).get("BM_TITLE").toString();
-	rb_writer = boardDetail.get(0).get("BM_WRITER").toString();
-	rb_content = boardDetail.get(0).get("BM_CONTENT").toString();
-	rb_pwd = boardDetail.get(0).get("BM_PW").toString();
-	rb_no = boardDetail.get(0).get("BM_NO").toString();
-	rb_group = boardDetail.get(0).get("BM_GROUP").toString();
-	rb_pos = boardDetail.get(0).get("BM_POS").toString();
-	rb_step = boardDetail.get(0).get("BM_STEP").toString();
+	rb_email 	= (String)boardDetail.get(0).get("BM_EMAIL");
+	rb_file 	= (String)boardDetail.get(0).get("BS_FILE");
+	rb_title	= (String)boardDetail.get(0).get("BM_TITLE");
+	rb_writer 	= (String)boardDetail.get(0).get("BM_WRITER");
+	rb_content 	= (String)boardDetail.get(0).get("BM_CONTENT");
+	rb_pwd 		= (String)boardDetail.get(0).get("BM_PW");
+	rb_no 		= boardDetail.get(0).get("BM_NO").toString();
+	rb_group 	= boardDetail.get(0).get("BM_GROUP").toString();
+	rb_pos 		= boardDetail.get(0).get("BM_POS").toString();
+	rb_step 	= boardDetail.get(0).get("BM_STEP").toString();
 }
 %>
 <!DOCTYPE html>
@@ -66,6 +66,9 @@ if (boardDetail != null && boardDetail.size() > 0) {
 	//댓글쓰기
 	function repleForm() {
 		$("#dlg_boardAdd").dialog('open');
+	}
+	function boardList(){
+		location.href = "./getBoardList.sp4";
 	}
 	//글삭제하기 이벤트 처리
 	function boardDelView(){

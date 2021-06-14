@@ -60,6 +60,13 @@ public class Board41Controller extends MultiActionController{
 //		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
 		return mav;
 	}
+	/****************************
+	 * 
+	 * @param req
+	 * @param res
+	 * @return
+	 * @throws Exception
+	 */
 	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res) 
 			throws Exception
 	{
@@ -67,6 +74,7 @@ public class Board41Controller extends MultiActionController{
 		HashMapBinder hmb = new HashMapBinder(req);
 		Map<String, Object> target = new HashMap<>();
 		hmb.bind(target);
+		target.put("gubun", "detail");
 		logger.info("bm_no : " + target.get("bm_no"));
 		List<Map<String, Object>> boardDetail = null;
 		boardDetail = boardLogic.getBoardList(target);

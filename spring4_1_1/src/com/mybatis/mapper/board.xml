@@ -26,6 +26,8 @@
 	<insert id="boardInsertMaster" parameterType = "map">
 <!-- 		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email, bm_content, bm_hit, bm_date,bm_group, bm_pos, bm_step, bm_pw)  -->
 <!-- 		VALUES(#{bm_no}, #{bm_title}, #{bm_date}, #{bm_hit}) -->
+<!-- 		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email, bm_content, bm_pw)  -->
+<!-- 		VALUES( '5', #{bm_title}, #{bm_writer}, #{bm_email}, #{bm_content}, #{bm_pw}) -->
 		
 		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email
 		                           , bm_content, bm_hit, bm_date, bm_group, bm_pos, bm_step, bm_pw) 
@@ -34,7 +36,8 @@
 		                            )
 	</insert>
 	<insert id="boardInsertSub" parameterType = "map">
-		INSERT INTO board_sub2019(bm_no, bs_file, bs_size) VALUES(#{bm_no}, #{bs_file}, #{bs_size})
+<!-- 		INSERT INTO board_sub2019(bm_no, bs_file, bs_size) VALUES(#{bm_no}, #{bs_file}, #{bs_size}) -->
+		INSERT INTO board_sub2019(bm_no,bs_seq,bs_file,bs_size) values(#{bm_no},#{bs_seq},#{bs_file},#{bs_size})
 		
 <!-- 		INSERT INTO board_sub2019(bm_no,bs_seq,bs_file,bs_size) values(#{bm_no},#{bs_seq},#{bs_file},#{bs_size}) -->
 	</insert>
@@ -44,7 +47,7 @@
 	</update>
 	<update id="bmStepUpdate" parameterType="map">
 		UPDATE board_master2019 SET bm_step = bm_step + 1 WHERE bm_group = #{bm_group}
-		<![CDATA[ and bm_step > #{bm_step ]]>
+		<![CDATA[ and bm_step > #{bm_step} ]]>
 	</update>
 	
 	<delete id="boardMDelete" parameterType="map">

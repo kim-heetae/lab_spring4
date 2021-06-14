@@ -19,6 +19,10 @@ public class Board41Logic {
 	public List<Map<String, Object>> getBoardList(Map<String, Object> pmap) {
 		logger.info("getBoardList 호출 성공");
 		List<Map<String, Object>> boardList = null;
+		String gubun = (String)pmap.get("gubun");
+		if(gubun != null && "detail".equals(gubun)) {
+			boardMDao.hitCount(pmap);
+		}
 		boardList = boardMDao.getBoardList(pmap);
 		return boardList;
 	}
@@ -51,7 +55,24 @@ public class Board41Logic {
 			result = 1;
 		return result;
 	}
-
+	
+//	public int boardInsert(Map<String, Object> pmap) {
+//		int result = 0;
+//		int fileOk = 1;
+//		logger.info("boardUpdate 호출성공");
+//		int resultMaster = boardMDao.boardInsert(pmap);
+//		if(pmap.containsKey("bs_file")) {
+//			fileOk = boardSDao.boardInsert(pmap);
+//		}
+//		if(resultMaster == 1 && fileOk == 1) {
+//			result = 1;
+//		}
+//		else {
+//			result = 0;
+//		}
+//		return result;
+//	}
+	
 //	public int boardUpdate(Map<String, Object> pmap) {
 //		int result = 0;
 //		int fileOk = 1;
