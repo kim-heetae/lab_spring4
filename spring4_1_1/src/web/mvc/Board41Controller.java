@@ -91,9 +91,11 @@ public class Board41Controller extends MultiActionController{
 			throws Exception
 	{
 		logger.info("Board41Controller - jsongetBoardList 호출성공");
-		
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> target = new HashMap<>();
+		hmb.bind(target);
 		List<Map<String, Object>> boardList = null;
-		boardList = boardLogic.getBoardList(null);
+		boardList = boardLogic.getBoardList(target);
 //		RequestDispatcher view = req.getRequestDispatcher("jsonGetBoardList.jsp");
 //		view.forward(req, res);//이 부분이 있다면 webcontent - board경로를 탄다// 없다면 web-inf - views - board경로를 탄다
 		Gson gson = new Gson();

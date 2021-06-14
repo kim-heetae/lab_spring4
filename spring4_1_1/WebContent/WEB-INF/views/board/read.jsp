@@ -109,9 +109,9 @@ if (boardDetail != null && boardDetail.size() > 0) {
 	function boardDelClose(){
 		 $('#d_boardDel').dialog('close');
 	}
-	function boardList(){
-		location.href="/board/boardList.jsp";
-	}
+// 	function boardList(){
+// 		location.href="/board/boardList.jsp";
+// 	}
 </script>
 </head>
 <body>

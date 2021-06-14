@@ -20,6 +20,9 @@
     <if test = 'bm_no > 0'>
     	AND bm.bm_no = #{bm_no}
     </if>
+    <if test = 'bm_hit > 0'>
+    	AND bm.bm_hit = #{bm_hit}
+    </if>
     	ORDER BY bm_group desc, bm_step asc
 	</select>
 	
@@ -57,7 +60,7 @@
 		DELETE FROM board_sub2019 WHERE bm_no = #{bm_no}
 	</delete>
 	<select id= "getBmNo" parameterType="int" resultType="int">
-		SELECT NVL((SELECT /*+index_desc(board_master2019 BM_NO_PK)*/ bm_no
+		SELECT NVL((SELECT /*+index_desc(board_master2019 BOARD_MNO_PK)*/ bm_no
 				FROM board_master2019
 				WHERE rownum = 1), 0) + 1 bm_no FROM dual
 	</select>

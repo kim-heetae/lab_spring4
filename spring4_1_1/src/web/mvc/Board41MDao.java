@@ -31,14 +31,19 @@ public class Board41MDao {
 		int result = 0;
 		result = sqlSessionTemplate.update("bmStepUpdate",pmap);
 	}
-	public void hitCount(Map<String, Object> pmap) {
+	public void hitCount(int bm_no) {
 		logger.info("boardMDao.boardInsert 호출성공");
 		int result = 0;
-		result = sqlSessionTemplate.update("hitCount",pmap);
+		result = sqlSessionTemplate.update("hitCount",bm_no);
 	}
 	public int getBmGroup() {
 		int result = 0;
 		result = sqlSessionTemplate.selectOne("getBmGroup");
+		return result;
+	}
+	public int getBmNo(int bm_no) {
+		int result = 0;
+		result = sqlSessionTemplate.selectOne("getBmNo", bm_no);
 		return result;
 	}
 }

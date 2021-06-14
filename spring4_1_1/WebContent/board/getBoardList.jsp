@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <%
 	StringBuilder path = new StringBuilder(request.getContextPath());
 	path.append("/");
-%> 
+	List<Map<String, Object>> boardList = null;
+	boardList = (List<Map<String, Object>>)request.getAttribute("boardList");
+	int size = 0;
+	if(boardList != null){
+		size = boardList.size();
+	}
+	out.print("size : " + size);
+	
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +23,7 @@
 	function search(){
 		console.log("조회 호출");
 		$('#dg_board').datagrid({			
-			url:'jsonGetBoardList.sp4',
+			url:'./jsonGetBoardList.sp4',
 		});
 	}
 	
@@ -35,15 +44,15 @@
 </head>
 <body>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#dg_board').datagrid({
-				toolbar:'#tb_board2'
-			});
-		})
+// 		$(document).ready(function(){
+// 			$('#dg_board').datagrid({
+// 				toolbar:'#tb_board'
+// 			});
+// 		})
 		
 	</script>
 	
-	<table id = "dg_board" class = "easyui-datagrid" data-options = "title:'게시판-webapp'" style = "width:500px;height:350px">
+	<table id = "dg_board" class = "easyui-datagrid" data-options = "title:'게시판-webapp',toolbar:'#tb_board'" style = "width:500px;height:350px">
 	    <thead>
 	        <tr>
 	            <th data-options="field:'BM_NO'">글번호</th>
@@ -55,7 +64,7 @@
 	    </thead>
 	</table>
 	
-	<div id="tb_board2" style="padding:2px 5px;">
+	<div id="tb_board" style="padding:2px 5px;">
 	        <a href="javascript:search()" class="easyui-linkbutton" iconCls="icon-search" plain="true">조회</a>
 	        <a href="javascript:ins()" class="easyui-linkbutton" iconCls="icon-add" plain="true">입력</a>
 	        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true">수정</a>
