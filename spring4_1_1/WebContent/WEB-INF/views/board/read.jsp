@@ -60,6 +60,7 @@ if (boardDetail != null && boardDetail.size() > 0) {
 		  ,cache:false
 		 ,modal:true	  
 		});
+		$('#f_detail').submit();
 		//$('#d_boardUpd').dialog('open');	
 		//$('#d_boardUpd').dialog('refresh', '');
 	}
@@ -115,6 +116,8 @@ if (boardDetail != null && boardDetail.size() > 0) {
 </script>
 </head>
 <body>
+<form id = "f_detail" action = "./boardUpdate.sp4">
+<input type="hidden" name="bm_no" value="<%=rb_no%>"> 
 	<table align="center" id="p" class="easyui-panel" title="글상세보기" data-options="footer:'#tb_read'" style="width: 670px; height: 380px; padding: 10px; background: #fafafa;">
 		<tr>
 			<td>제목</td>
@@ -143,7 +146,7 @@ if (boardDetail != null && boardDetail.size() > 0) {
 		<tr>
 			<td>비밀번호</td>
 			<td>
-				<input id="bm_pw" value="<%=rb_pwd%>" name="bm_pw" class="easyui-passwordbox">
+				<input id="bm_pw" value="" name="bm_pw" class="easyui-passwordbox">
 			</td>
 		</tr>
 	</table>
@@ -153,10 +156,11 @@ if (boardDetail != null && boardDetail.size() > 0) {
 		<a href="javascript:boardDelView()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">삭제</a> 
 		<a href="javascript:boardList()" class="easyui-linkbutton" iconCls="icon-search" plain="true">목록</a>
 	</div>
-
+</form>
 	<!--================== [[댓글쓰기 화면]] ==================-->
 	<div id="dlg_boardAdd" title="댓글쓰기" class="easyui-dialog" style="width: 600px; height: 400px; padding: 10px" 
 		data-options="closed:'true',modal:'true',footer:'#tbar_boardAdd'">
+		
 		<!-- 
 form전송시 encType옵션이 추가되면 request객체로 사용자가 입력한 값을 꺼낼 수 없다.
 MultipartRequest  => cos.jar

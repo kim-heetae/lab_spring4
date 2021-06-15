@@ -26,7 +26,6 @@
 		$("#dlg_ins").dialog('open');
 	}
 </script>
-</head>
 <script type="text/javascript">
 	function boardSel(){
 		$('#dg_board').datagrid({
@@ -45,7 +44,7 @@
 	
 	function boardUpd(){
 		$('#dg_board').datagrid({
-			url:'boardUpdate.sp4'			
+			url:'./boardUpdate.sp4'			
 		});		
 	}
 	function boardDel(){
@@ -53,7 +52,12 @@
 			url:'boardDelete.sp4'			
 		});				
 	}
+	function boardsubmit(){
+		$('#board_ins').submit();
+	}
+
 </script>
+</head>
 <body>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -64,7 +68,12 @@
 			     {field:'BM_DATE',title:'작성일',width:150,align:'center'},
 			     {field:'BS_FILE',title:'첨부파일',width:230,align:'center'},
 			     {field:'BM_HIT',title:'조회수',width:100,align:'center'}
-			]]
+			]],
+// 			onDbClickCell: function(index, field, value){
+// 				if("BS_FILE" == field){
+// 					location.href = "download.jsp?bs_file="+value;
+// 				}
+// 			}
 		});
 	    $('#btn_sel').bind('click', function(){
 	        boardSel();
@@ -78,6 +87,7 @@
 	    $('#btn_del').bind('click', function(){
 	        boardDel();
 	    });
+
 	});
 </script>
 <table id = "dg_board" class = "easyui-datagrid" data-options = "title:'게시판-[WEB-INF]',toolbar:'#tb_board'" style = "width:1000px;height:350px;">
@@ -116,7 +126,9 @@
             <td><%=rmap.get("BM_NO") %></td>
             <td><a href="./getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO") %>"><%=rmap.get("BM_TITLE") %></a></td>
             <td><%=rmap.get("BM_DATE") %></td>
-            <td><%=rmap.get("BS_FILE") %></td>
+            <td><a href="./download.jsp?b_file=<%=rmap.get("BS_FILE") %>"><%=rmap.get("BS_FILE") %></a></td>
+<%--             <td><a href="javascript:download(<%=rmap.get("BS_FILE") %>)"><%=rmap.get("BS_FILE") %></a></td> --%>
+<%--             <td><%=rmap.get("BS_FILE") %></td> --%>
             <td><%=rmap.get("BM_HIT") %></td>
 <!--             <td data-options="field:'BM_NO'">글번호</td> -->
 <!--             <td data-options="field:'BM_TITLE'">글제목</td> -->
@@ -137,8 +149,11 @@
         <a id="btn_del" href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a>
 </div>
 <!--========================================= 글쓰기 화면 시작 ============================================  -->
-	<div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save',closed:'false',resizable:true,modal:true" style="width:600px;height:500px;padding:10px;">
-    	<form action="./boardInsert.sp4">
+	<div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save',closed:'false',resizable:true,modal:true, footer:'#ft_ins'" style="width:600px;height:500px;padding:10px;">
+    	<form id="board_ins" action="./boardInsert.sp4" method = "post" enctype = "multipart/form-data">
+<!--     	<input type="hidden" name="bm_group" value="0">  -->
+<!--     	<input type="hidden" name="bm_pos" value="0">  -->
+<!--     	<input type="hidden" name="bm_step" value="0">  -->
 	    	<div style="margin-bottom:20px">
 	            <input name="bm_title" class="easyui-textbox" label="제목" labelPosition="top" style="width:100%;">
 	        </div>
@@ -157,13 +172,22 @@
 	        <div style="margin-bottom:20px">
             	<input name="bm_pw" class="easyui-passwordbox" label = "비밀번호" labelPosition="top" prompt="Password" iconWidth="28" style="width:100%;">
         	</div>
-	        <div>
-	            <input type="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px;">
-	        </div>
+<!-- 	        <div> -->
+<!-- 	            <input type="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px;"> -->
+<!-- 	        </div> -->
+	    	<div id="ft_ins" style="text-align:right">
+				<a href="javascript:boardsubmit()" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">저장</a>
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">취소</a>
+			</div>
     	</form>
         
     </div>
 	<!--========================================= 글쓰기 화면 끝 =============================================  -->
-
+<script type="text/javascript">
+// function download(value){
+// 	alert(value);
+// 	location.href = "./download.jsp?b_file="+value;
+// }
+</script>
 </body>
 </html>

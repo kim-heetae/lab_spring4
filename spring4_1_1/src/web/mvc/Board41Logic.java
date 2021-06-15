@@ -36,9 +36,9 @@ public class Board41Logic {
 		int result = 0;
 		int bm_no = 0;
 		int bm_group = 0;
+//		int pbm_no = Integer.parseInt(pmap.get("bm_no").toString());
+		bm_no = boardMDao.getBmNo(bm_no);
 		pmap.put("bm_no", bm_no);
-		int pbm_no = Integer.parseInt(pmap.get("bm_no").toString());
-		bm_no = boardMDao.getBmNo(pbm_no);
 		if(pmap.get("bm_group") != null) {
 			bm_group = Integer.parseInt(pmap.get("bm_group").toString());
 		}
@@ -54,13 +54,25 @@ public class Board41Logic {
 			pmap.put("bm_step", 0);
 		}
 		if((pmap.get("bs_file") != null) && (pmap.get("bs_file").toString().length() > 0)) {
-			pmap.put("bm_no", bm_no);
+//			pmap.put("bm_no", bm_no);
 			pmap.put("bm_seq", 1);
 			boardSDao.boardInsert(pmap);
 		}
 		logger.info("boardInsert 호출성공");
 		int resultMaster = boardMDao.boardInsert(pmap);
 			result = 1;
+		return result;
+	}
+
+	public int boardUpdate(Map<String, Object> pmap) {
+		int result = 0;
+		String pw = "";
+		if(pmap.get("bm_no") != null) {
+			pw = boardMDao.getPw(pmap.get("bm_no").toString());			
+			if(pw.equals(pmap.get("bm_pw"))) {
+				result = boardMDao.boardUpdate(pmap);			
+			}
+		}
 		return result;
 	}
 	

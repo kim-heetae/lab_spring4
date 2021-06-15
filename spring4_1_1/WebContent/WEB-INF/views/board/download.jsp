@@ -21,10 +21,6 @@
 	}
    	response.setHeader("Content-Disposition", "attachment;filename="+downName);
  	FileInputStream fis = new FileInputStream(file);
- 	///////////////////////////////////
-	out.clear();
-	out=pageContext.pushBody();
- 	///////////////////////////////////
 	ServletOutputStream sos = response.getOutputStream();
 	try{
 		byte b[] = new byte[1024*10];

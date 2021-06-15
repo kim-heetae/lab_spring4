@@ -46,4 +46,14 @@ public class Board41MDao {
 		result = sqlSessionTemplate.selectOne("getBmNo", bm_no);
 		return result;
 	}
+	public int boardUpdate(Map<String, Object> pmap) {
+		int result = 0;
+		result = sqlSessionTemplate.update("boardMUpdate", pmap);
+		return result;
+	}
+	public String getPw(String bm_pw) {
+		String pw = "";
+		pw = sqlSessionTemplate.selectOne("getPw", bm_pw);
+		return pw;
+	}
 }
