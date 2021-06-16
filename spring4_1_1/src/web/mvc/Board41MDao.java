@@ -56,4 +56,9 @@ public class Board41MDao {
 		pw = sqlSessionTemplate.selectOne("getPw", bm_pw);
 		return pw;
 	}
+	public int boardDelete(Map<String, Object> pmap) {
+		int result = 0;
+		result = sqlSessionTemplate.delete("boardMDelete", pmap);
+		return result;
+	}
 }

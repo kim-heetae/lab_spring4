@@ -55,7 +55,7 @@ public class Board41Logic {
 		}
 		if((pmap.get("bs_file") != null) && (pmap.get("bs_file").toString().length() > 0)) {
 //			pmap.put("bm_no", bm_no);
-			pmap.put("bm_seq", 1);
+			pmap.put("bs_seq", 1);
 			boardSDao.boardInsert(pmap);
 		}
 		logger.info("boardInsert 호출성공");
@@ -71,6 +71,22 @@ public class Board41Logic {
 			pw = boardMDao.getPw(pmap.get("bm_no").toString());			
 			if(pw.equals(pmap.get("bm_pw"))) {
 				result = boardMDao.boardUpdate(pmap);			
+			}
+		}
+		return result;
+	}
+
+	public int boardDelete(Map<String, Object> pmap) {
+		int result = 0;
+		
+		String pw = "";
+		if(pmap.get("bm_no") != null && pmap.get("bm_pw") != null) {
+			pw = boardMDao.getPw(pmap.get("bm_no").toString());		
+			if(pw != null) {
+				if(pw.equals(pmap.get("bm_pw"))) {
+					result = boardMDao.boardDelete(pmap);
+					boardSDao.boardDelete(pmap);
+				}
 			}
 		}
 		return result;

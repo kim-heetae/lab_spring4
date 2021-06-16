@@ -120,7 +120,7 @@ public class Board41Controller extends MultiActionController{
 			res.sendRedirect("./getBoardList.sp4");
 		}
 		else {
-			res.sendRedirect("등록실패 페이지 처리");
+			res.sendRedirect("./boardInsertFail.jsp");
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class Board41Controller extends MultiActionController{
 		HashMapBinder hmb = new HashMapBinder(req);
 		Map<String, Object> pmap = new HashMap<>();
 		//사용자가 입력한 값이나 서버에서 클라이언트에게 요청한 값 넘김.
-		hmb.bindPost(pmap);
+		hmb.multiBind(pmap);
 		logger.info("boardUpdate pmap : " + pmap);
 		int result = 0;
 		result = boardLogic.boardUpdate(pmap);		
@@ -137,11 +137,22 @@ public class Board41Controller extends MultiActionController{
 			res.sendRedirect("./getBoardList.sp4");
 		}
 		else {
-			res.sendRedirect("등록실패 페이지 처리");
+			res.sendRedirect("./boardUpdateFail.jsp");
 		}
 	}
 	
 	public void boardDelete(HttpServletRequest req, HttpServletResponse res) throws Exception{
-		
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> pmap = new HashMap<>();
+		hmb.multiBind(pmap);
+		logger.info("boardDelete pmap : " + pmap);
+		int result = 0;
+		result = boardLogic.boardDelete(pmap);
+		if(result == 1) {
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			res.sendRedirect("./boardDeleteFail.jsp");
+		}
 	}
 }

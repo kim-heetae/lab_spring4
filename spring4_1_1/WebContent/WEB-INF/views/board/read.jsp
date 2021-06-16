@@ -43,8 +43,9 @@ if (boardDetail != null && boardDetail.size() > 0) {
 <jsp:include page="../../../common/commonUIglobal.jsp" flush="false" />
 <script type="text/javascript">
 	function addAction(){
-		$("#f_boardAdd").attr("method","post");
-		$("#f_boardAdd").attr("action","/board/boardList.mvc?crud=ins");
+// 		$("#f_boardAdd").attr("method","post");
+// 		$("#f_boardAdd").attr("enctype","multipart/form-data");
+		$("#f_boardAdd").attr("action","./boardInsert.sp4");
 		$("#f_boardAdd").submit();
 		//부모창에 함수를 호출할때 opener.함수명();
 		//opener.boardList();
@@ -52,17 +53,37 @@ if (boardDetail != null && boardDetail.size() > 0) {
 	}
 	function updateForm(){
 		//alert("updateForm 호출 성공");
-		$('#d_boardUpd').dialog({
-			title:'글수정'
-		  ,width:720
-		  ,height:450
-		  ,closed:false
-		  ,cache:false
-		 ,modal:true	  
-		});
+// 		$('#d_boardUpd').dialog({
+// 			title:'글수정'
+// 		  ,width:720
+// 		  ,height:450
+// 		  ,closed:false
+// 		  ,cache:false
+// 		 ,modal:true	  
+// 		});		
+		$('#f_detail').attr("method", "post");
+		$('#f_detail').attr("action", "./boardUpdate.sp4");
 		$('#f_detail').submit();
 		//$('#d_boardUpd').dialog('open');	
 		//$('#d_boardUpd').dialog('refresh', '');
+	}
+	//글삭제하기 이벤트 처리
+	function boardDelView(){
+		alert("boardDelView호출 성공");
+// 		  $('#d_boardDel').dialog({
+// 			    title: '글삭제',
+// // 			    buttons: btn_boardDel,
+// 			    width: 420,
+// 			    height: 250,
+// 			    closed: true,
+// 			    cache: false,
+<%-- 			    href: "./boardDelete.sp4?bm_no=<%=rb_no%>&bm_pw=<%=rb_pwd%>" , --%>
+// 			    modal: true
+// 	   }); 	
+	   $('#f_detail').attr("method", "post");		
+	   $('#f_detail').attr("action", "./boardDelete.sp4");		
+	   $('#f_detail').submit();
+// 	   $('#d_boardDel').dialog('open');		
 	}
 	//댓글쓰기
 	function repleForm() {
@@ -71,24 +92,10 @@ if (boardDetail != null && boardDetail.size() > 0) {
 	function boardList(){
 		location.href = "./getBoardList.sp4";
 	}
-	//글삭제하기 이벤트 처리
-	function boardDelView(){
-		alert("boardDelView호출 성공");
-		  $('#d_boardDel').dialog({
-			    title: '글삭제',
-			    buttons: btn_boardDel,
-			    width: 420,
-			    height: 250,
-			    closed: true,
-			    cache: false,
-			    //href: 'boardDelForm.jsp?bm_no=<%=rb_no%>&bm_pw=<%=rb_pwd%>',
-			    modal: true
-	   }); 
-	   $('#d_boardDel').dialog('open');		
-	}
+	
 	//글삭제 화면에서 확인 버튼을 클릭했을 때
 	function boardDel(){
-		var db_pw = <%=rb_pwd%>
+		var db_pw = <%=rb_pwd %>
 		var u_pw = $("#u_pw").textbox('getValue');
 		//alert("db_pw:"+db_pw+", u_pw:"+u_pw);
 		//alert("사용자가 입력한 비번:"+$("#db_pw").textbox('getValue'));
@@ -116,9 +123,9 @@ if (boardDetail != null && boardDetail.size() > 0) {
 </script>
 </head>
 <body>
-<form id = "f_detail" action = "./boardUpdate.sp4">
+<form id = "f_detail" enctype="multipart/form-data">
 <input type="hidden" name="bm_no" value="<%=rb_no%>"> 
-	<table align="center" id="p" class="easyui-panel" title="글상세보기" data-options="footer:'#tb_read'" style="width: 670px; height: 380px; padding: 10px; background: #fafafa;">
+	<table align="center" id="p" class="easyui-panel" title="글상세보기 [WEB_INF]" data-options="footer:'#tb_read'" style="width: 670px; height: 380px; padding: 10px; background: #fafafa;">
 		<tr>
 			<td>제목</td>
 			<td>
@@ -165,7 +172,7 @@ if (boardDetail != null && boardDetail.size() > 0) {
 form전송시 encType옵션이 추가되면 request객체로 사용자가 입력한 값을 꺼낼 수 없다.
 MultipartRequest  => cos.jar
  -->
-		<form id="f_boardAdd" method="get">
+		<form id="f_boardAdd" method="post" enctype = multipart/form-data>
 			<input type="hidden" name="bm_no" value="<%=rb_no%>"> 
 			<input type="hidden" name="bm_group" value="<%=rb_group%>"> 
 			<input type="hidden" name="bm_pos" value="<%=rb_pos%>"> 

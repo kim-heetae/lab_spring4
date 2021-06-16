@@ -32,4 +32,10 @@ public class Board41SDao {
 		
 		return result;
 	}
+
+	public int boardDelete(Map<String, Object> pmap) {
+		int result = 0;
+		result = sqlSessionTemplate.delete("boardSDelete", pmap);
+		return result;
+	}
 }

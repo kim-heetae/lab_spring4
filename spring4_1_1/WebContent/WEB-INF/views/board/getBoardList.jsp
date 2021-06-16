@@ -123,12 +123,38 @@
     			if(i == size) break;
 	%>    
         <tr>
-            <td><%=rmap.get("BM_NO") %></td>
-            <td><a href="./getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO") %>"><%=rmap.get("BM_TITLE") %></a></td>
+            <td>
+            <%=rmap.get("BM_NO") %>
+            </td>
+            <!-- 너 댓글이니? -->
+            <td>
+            <%
+//             	String imgPath = "\\board\\";
+            	String imgPath = "..\\images\\";
+            	if(Integer.parseInt(rmap.get("BM_POS").toString()) > 0){
+            		for(int j = 0; j < Integer.parseInt(rmap.get("BM_POS").toString()); j++){
+            			out.print("&nbsp;&nbsp;&nbsp;");
+            		}
+            %>
+            <img src="<%=imgPath%>reply.gif" border="0">
+            <%
+    			}
+            %>
+            <a href="./getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO") %>" style= "text-decoration:none;"><%=rmap.get("BM_TITLE") %></a></td>
             <td><%=rmap.get("BM_DATE") %></td>
-            <td><a href="./download.jsp?b_file=<%=rmap.get("BS_FILE") %>"><%=rmap.get("BS_FILE") %></a></td>
+            <%
+            	if(!rmap.get("BS_FILE").equals("해당없음")){
+            %>
+            <td><a href="./download.jsp?b_file=<%=rmap.get("BS_FILE") %>" style= "text-decoration:none;"><%=rmap.get("BS_FILE") %></a></td>
+            <%
+            	}else{
+            %>
 <%--             <td><a href="javascript:download(<%=rmap.get("BS_FILE") %>)"><%=rmap.get("BS_FILE") %></a></td> --%>
-<%--             <td><%=rmap.get("BS_FILE") %></td> --%>
+            <td><%=rmap.get("BS_FILE") %></td>
+            <%
+            	} 
+            %>
+            
             <td><%=rmap.get("BM_HIT") %></td>
 <!--             <td data-options="field:'BM_NO'">글번호</td> -->
 <!--             <td data-options="field:'BM_TITLE'">글제목</td> -->
@@ -155,10 +181,10 @@
 <!--     	<input type="hidden" name="bm_pos" value="0">  -->
 <!--     	<input type="hidden" name="bm_step" value="0">  -->
 	    	<div style="margin-bottom:20px">
-	            <input name="bm_title" class="easyui-textbox" label="제목" labelPosition="top" style="width:100%;">
+	            <input name="bm_title" class="easyui-textbox" label="제목" required="required" labelPosition="top" style="width:100%;">
 	        </div>
 	        <div style="margin-bottom:20px">
-	            <input name="bm_writer" class="easyui-textbox" label="작성자" labelPosition="top" style="width:100%;">
+	            <input name="bm_writer" class="easyui-textbox" label="작성자" required="required" labelPosition="top" style="width:100%;">
 	        </div>
 	        <div style="margin-bottom:20px">
 	            <input name="bm_email" class="easyui-textbox" label="email" labelPosition="top"  data-options="prompt:'Enter a email address...',validType:'email'" style="width:100%;">
@@ -170,7 +196,7 @@
 	            <input name="bs_file" class="easyui-filebox" label="첨부파일" labelPosition="top" style="width:100%;">
 	        </div>
 	        <div style="margin-bottom:20px">
-            	<input name="bm_pw" class="easyui-passwordbox" label = "비밀번호" labelPosition="top" prompt="Password" iconWidth="28" style="width:100%;">
+            	<input name="bm_pw" class="easyui-passwordbox" label = "비밀번호" labelPosition="top" required="required" prompt="Password" iconWidth="28" style="width:100%;">
         	</div>
 <!-- 	        <div> -->
 <!-- 	            <input type="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px;"> -->
@@ -183,11 +209,6 @@
         
     </div>
 	<!--========================================= 글쓰기 화면 끝 =============================================  -->
-<script type="text/javascript">
-// function download(value){
-// 	alert(value);
-// 	location.href = "./download.jsp?b_file="+value;
-// }
-</script>
+
 </body>
 </html>
