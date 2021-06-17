@@ -56,6 +56,12 @@
 	<delete id="boardMDelete" parameterType="map">
 		DELETE FROM board_master2019 WHERE bm_no = #{bm_no}
 	</delete>
+	<delete id="boardMManagerDelete" parameterType="map">
+		DELETE FROM board_master2019 WHERE bm_no IN 
+		<foreach item="item" index = "index" collection="li" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
 	<delete id="boardSDelete" parameterType="map">
 		DELETE FROM board_sub2019 WHERE bm_no = #{bm_no}
 	</delete>

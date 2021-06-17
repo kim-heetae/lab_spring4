@@ -91,6 +91,18 @@ public class Board41Logic {
 		}
 		return result;
 	}
+
+	public int boardManagerDelete(Map<String, Object> pmap) {
+		int result = 0;
+		result = boardMDao.boardManagerDelete(pmap);
+		return result;
+	}
+
+	public int getPwManager(Map<String, Object> pmap) {
+		int result = 0;
+		
+		return result;
+	}
 	
 //	public int boardInsert(Map<String, Object> pmap) {
 //		int result = 0;

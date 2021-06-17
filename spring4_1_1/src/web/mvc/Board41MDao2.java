@@ -9,8 +9,8 @@ import java.util.StringTokenizer;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
-public class Board41MDao {
-	Logger logger = Logger.getLogger(Board41MDao.class);
+public class Board41MDao2 {
+	Logger logger = Logger.getLogger(Board41MDao2.class);
 	SqlSessionTemplate sqlSessionTemplate = null;
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
@@ -69,20 +69,22 @@ public class Board41MDao {
 		String bm_nos = (String)pmap.get("bm_no");
 		StringTokenizer st = new StringTokenizer(bm_nos,"cutter");
 		Map<Integer, Integer> pmap2 = new HashMap<>();
-		List li = new ArrayList();
-		Map map = new HashMap();
-		while(st.hasMoreTokens()) {
-			li.add(Integer.parseInt(st.nextToken()));
+		List<Map<Integer, Integer>> li = new ArrayList<>();
+//		for(int j = 0; j < )
+		for(int i = 0; i < st.countTokens(); i++) {
+			pmap2 = new HashMap<>();
+			pmap2.put(i, Integer.parseInt(st.nextToken())+0);
+			li.add(pmap2);
 		}
-		map.put("li", li);
-		result = sqlSessionTemplate.delete("boardMManagerDelete", map);
-		logger.info(result);
-		if(result == li.size()) {
-			result = 1;
-		}
-		else {
-			result = 0;
-		}
+		Map<String, List<Map<Integer, Integer>>> pmap3 = new HashMap<>();
+		pmap3.put("li", li);
+		result = sqlSessionTemplate.delete("boardMManagerDelete", pmap3);
+//		if(result == st.countTokens()) {
+//			result = 1;
+//		}
+//		else {
+//			result = 0;
+//		}
 		return result;
 	}
 }

@@ -19,14 +19,14 @@
 <meta charset="UTF-8">
 <title>getBoardList.jsp 게시판 구현 - [WEB-INF]</title>
 <jsp:include page="../../../common/commonUIglobal.jsp" flush= "false"/>
+<jsp:include page="./readscript.jsp" flush= "false"/>
+<!-- <script type="text/javascript" src="./readscript.jsp"></script> -->
 <!-- <script type="text/javascript" src="../../../common/commonUIglobal.jsp"></script> -->
 <script type="text/javascript">
-	function ins(){
+	function boardIns(){
 		console.log("입력 호출");
 		$("#dlg_ins").dialog('open');
 	}
-</script>
-<script type="text/javascript">
 	function boardSel(){
 		$('#dg_board').datagrid({
 // 			url:'./jsonGetBoardList.sp4'
@@ -43,14 +43,42 @@
 // 	}
 	
 	function boardUpd(){
-		$('#dg_board').datagrid({
-			url:'./boardUpdate.sp4'			
-		});		
+		const rows = $('#dg_board').datagrid('getSelections');
+		if(rows.length > 1){
+			$.messager.confirm('Confirm','하나만 선택해주세요');
+		}
+		else if(rows.length == 0){			
+			$.messager.confirm('Confirm','수정할 항목을 선택해주세요');
+		}
+		else{
+			let row = rows[0].BM_NO.trim();
+// 			$('#dlg_edit').attr('url', './getBoardList.sp4?bm_no='+row);
+			$('#dlg_edit').dialog({
+				closed: false,
+				modal: true,
+				href: './getBoardDetail.sp4?bm_no='+row
+			});
+// 			$('#modal_bm_no').attr('value', row);
+// 			console.log(row);
+// 			$('#board_pw').submit();
+// 			location.href = './boardUpdate.sp4?bm_no=' + row
+		}
 	}
 	function boardDel(){
-		$('#dg_board').datagrid({
-			url:'boardDelete.sp4'			
-		});				
+		console.log('삭제');
+// 		$('#dg_board').datagrid({
+			const rows = $('#dg_board').datagrid('getSelections');
+			let row = "";
+			for(let i = 0; i < rows.length; i++){
+				if(i != rows.length){
+					row = row + rows[i].BM_NO.trim() + "cutter";					
+				}
+				else{
+					row = row + rows[i].BM_NO.trim();										
+				}
+			}
+				location.href ='./boardManagerDelete.sp4?bm_no=' + row
+// 		});				
 	}
 	function boardsubmit(){
 		$('#board_ins').submit();
@@ -81,12 +109,12 @@
 // 	    $('#btn_ins').bind('click', function(){
 // 	        boardIns();
 // 	    });
-	    $('#btn_upd').bind('click', function(){
-	        boardUpd();
-	    });
-	    $('#btn_del').bind('click', function(){
-	        boardDel();
-	    });
+// 	    $('#btn_upd').bind('click', function(){
+// 	        boardUpd();
+// 	    });
+// 	    $('#btn_del').bind('click', function(){
+// 	        boardDel();
+// 	    });
 
 	});
 </script>
@@ -133,7 +161,7 @@
             	String imgPath = "..\\images\\";
             	if(Integer.parseInt(rmap.get("BM_POS").toString()) > 0){
             		for(int j = 0; j < Integer.parseInt(rmap.get("BM_POS").toString()); j++){
-            			out.print("&nbsp;&nbsp;&nbsp;");
+            			out.print("&nbsp;&nbsp;");
             		}
             %>
             <img src="<%=imgPath%>reply.gif" border="0">
@@ -170,9 +198,9 @@
 </table>
 <div id="tb_board" style="padding:2px 5px;">
         <a id="btn_sel" href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true">조회</a>
-        <a id="btn_ins" href="javascript:ins()" class="easyui-linkbutton" iconCls="icon-add" plain="true">입력</a>
-        <a id="btn_upd" href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true">수정</a>
-        <a id="btn_del" href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a>
+        <a id="btn_ins" href="javascript:boardIns()" class="easyui-linkbutton" iconCls="icon-add" plain="true">입력</a>
+        <a id="btn_upd" href="javascript:boardUpd()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">수정</a>
+        <a id="btn_del" href="javascript:boardDel()" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a>
 </div>
 <!--========================================= 글쓰기 화면 시작 ============================================  -->
 	<div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save',closed:'false',resizable:true,modal:true, footer:'#ft_ins'" style="width:600px;height:500px;padding:10px;">
@@ -209,6 +237,13 @@
         
     </div>
 	<!--========================================= 글쓰기 화면 끝 =============================================  -->
-
+	<div id = "dlg_edit" class="easyui-dialog" title="수정하기" data-options="closed:true" style="width: 700px; height: 'fit-content';">
+	</div>
+<!-- 	<div id = "dlg_pw" class="easyui-dialog" title="비밀번호 확인" data-options="closed:'true'"> -->
+<!-- 		<form id="board_pw" method="post" action= "./boardUpdate.sp4" enctype = "multipart/form-data"> -->
+<!-- 			<input id="modal_bm_no" name="bm_no" type="hidden"> -->
+<!-- 			<input name="bm_pw" class="easyui-passwordbox" label = "비밀번호" labelPosition="top" required="required" prompt="Password" iconWidth="28" style="width:100%;"> -->
+<!-- 		</form> -->
+<!-- 	</div> -->
 </body>
 </html>

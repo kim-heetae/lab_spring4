@@ -140,6 +140,22 @@ public class Board41Controller extends MultiActionController{
 			res.sendRedirect("./boardUpdateFail.jsp");
 		}
 	}
+	public void boardManagerUpdate(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		logger.info("boardUpdate 호출성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> pmap = new HashMap<>();
+		//사용자가 입력한 값이나 서버에서 클라이언트에게 요청한 값 넘김.
+		hmb.bindPost(pmap);
+		logger.info("boardUpdate pmap : " + pmap);
+		int result = 0;
+		result = boardLogic.boardUpdate(pmap);		
+		if(result == 1) {
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			res.sendRedirect("./boardUpdateFail.jsp");
+		}
+	}
 	
 	public void boardDelete(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		HashMapBinder hmb = new HashMapBinder(req);
@@ -155,4 +171,32 @@ public class Board41Controller extends MultiActionController{
 			res.sendRedirect("./boardDeleteFail.jsp");
 		}
 	}
+	public void boardManagerDelete(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> pmap = new HashMap<>();
+		hmb.bindPost(pmap);
+		logger.info("boardManagerDelete pmap : " + pmap);
+		int result = 0;
+		result = boardLogic.boardManagerDelete(pmap);
+		if(result == 1) {
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			res.sendRedirect("./boardManagerDeleteFail.jsp");
+		}
+	}
+	public void getPwManager(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> pmap = new HashMap<>();
+		hmb.bindPost(pmap);
+		int result = 0;
+		result = boardLogic.getPwManager(pmap);
+		if(result == 1) {
+//			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+//			res.sendRedirect("./boardManagerDeleteFail.jsp");
+		}
+	}
+	
 }
