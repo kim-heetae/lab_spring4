@@ -1,5 +1,7 @@
 package web.mvc;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,13 +55,13 @@ public class Board41Logic {
 			pmap.put("bm_pos", 0);
 			pmap.put("bm_step", 0);
 		}
+		int resultMaster = boardMDao.boardInsert(pmap);
 		if((pmap.get("bs_file") != null) && (pmap.get("bs_file").toString().length() > 0)) {
 //			pmap.put("bm_no", bm_no);
 			pmap.put("bs_seq", 1);
 			boardSDao.boardInsert(pmap);
 		}
 		logger.info("boardInsert 호출성공");
-		int resultMaster = boardMDao.boardInsert(pmap);
 			result = 1;
 		return result;
 	}
@@ -94,7 +96,18 @@ public class Board41Logic {
 
 	public int boardManagerDelete(Map<String, Object> pmap) {
 		int result = 0;
+		int subresult = 0;
+//		List<Map<String, Object>> subList = new ArrayList<>();
+//		subList = boardSDao.boardFileNoSelect(pmap);
 		result = boardMDao.boardManagerDelete(pmap);
+//		subresult = boardSDao.boardManagerDelete(subList);
+//		subresult = boardSDao.boardManagerDelete(pmap);
+//		if(result == 1 && subresult == 1) {
+//			result = 1; 
+//		}
+//		else {
+//			result = 0;
+//		}
 		return result;
 	}
 

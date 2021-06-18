@@ -67,17 +67,37 @@
 	function boardDel(){
 		console.log('삭제');
 // 		$('#dg_board').datagrid({
-			const rows = $('#dg_board').datagrid('getSelections');
-			let row = "";
-			for(let i = 0; i < rows.length; i++){
-				if(i != rows.length){
-					row = row + rows[i].BM_NO.trim() + "cutter";					
+			const rows_no = $('#dg_board').datagrid('getSelections');
+			let row_no = "";
+			for(let i = 0; i < rows_no.length; i++){
+				if(i != rows_no.length - 1){
+					row_no = row_no + rows_no[i].BM_NO.trim() + "cutter";					
 				}
 				else{
-					row = row + rows[i].BM_NO.trim();										
+					row_no = row_no + rows_no[i].BM_NO.trim();										
 				}
 			}
-				location.href ='./boardManagerDelete.sp4?bm_no=' + row
+			const rows_file = $('#dg_board').datagrid('getSelections');
+			let row_file = "";
+			for(let i = 0; i < rows_file.length; i++){
+				if(i != rows_file.length - 1){
+					let afile = rows_file[i].BS_FILE.trim();
+					afile = (((afile||'').split('>')[1])||'').split('<')[0];
+					if(afile != ''){
+						row_file = row_file + afile + "cutter";						
+						alert('1' + afile);
+					}
+				}
+				else{
+					let afile = rows_file[i].BS_FILE.trim();
+					afile = (((afile||'').split('>')[1])||'').split('<')[0];
+					if(afile != ''){
+						row_file = row_file + afile;						
+						alert('2' + afile);
+					}
+				}
+			}
+				location.href ='./boardManagerDelete.sp4?bm_no=' + row_no + '&bs_file=' + row_file 
 // 		});				
 	}
 	function boardsubmit(){

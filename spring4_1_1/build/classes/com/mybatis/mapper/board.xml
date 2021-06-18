@@ -52,7 +52,12 @@
 		UPDATE board_master2019 SET bm_step = bm_step + 1 WHERE bm_group = #{bm_group}
 		<![CDATA[ and bm_step > #{bm_step} ]]>
 	</update>
-	
+	<select id="boardFileNoSelect" parameterType = "map" resultType = "map">
+		SELECT bm_no FROM board_sub2019 WHERE bm_no IN 
+		<foreach item = "item" index = "index" collection="li" open = "(" close = ")" separator = ",">
+			#{item}
+		</foreach>
+	</select>
 	<delete id="boardMDelete" parameterType="map">
 		DELETE FROM board_master2019 WHERE bm_no = #{bm_no}
 	</delete>
@@ -64,6 +69,12 @@
 	</delete>
 	<delete id="boardSDelete" parameterType="map">
 		DELETE FROM board_sub2019 WHERE bm_no = #{bm_no}
+	</delete>
+	<delete id="boardSManagerDelete" parameterType="map">
+		DELETE FROM board_sub2019 WHERE bs_file IN 
+		<foreach item="item" index = "index" collection="li" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
 	</delete>
 	<select id= "getBmNo" parameterType="int" resultType="int">
 		SELECT NVL((SELECT /*+index_desc(board_master2019 BOARD_MNO_PK)*/ bm_no
