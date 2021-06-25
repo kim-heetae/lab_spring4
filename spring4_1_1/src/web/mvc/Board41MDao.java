@@ -83,6 +83,7 @@ public class Board41MDao {
 		else {
 			result = 0;
 		}
+		logger.info("boardManagerDelete =============== " + result);
 		return result;
 	}
 }

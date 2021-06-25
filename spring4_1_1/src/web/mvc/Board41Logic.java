@@ -1,9 +1,11 @@
 package web.mvc;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 
@@ -68,46 +70,84 @@ public class Board41Logic {
 
 	public int boardUpdate(Map<String, Object> pmap) {
 		int result = 0;
-		String pw = "";
-		if(pmap.get("bm_no") != null) {
-			pw = boardMDao.getPw(pmap.get("bm_no").toString());			
-			if(pw.equals(pmap.get("bm_pw"))) {
-				result = boardMDao.boardUpdate(pmap);			
-			}
+		result = boardMDao.boardUpdate(pmap);
+		if(!pmap.get("bs_file").toString().equals("해당없음")) {
+			
 		}
 		return result;
 	}
 
 	public int boardDelete(Map<String, Object> pmap) {
 		int result = 0;
-		
-		String pw = "";
-		if(pmap.get("bm_no") != null && pmap.get("bm_pw") != null) {
-			pw = boardMDao.getPw(pmap.get("bm_no").toString());		
-			if(pw != null) {
-				if(pw.equals(pmap.get("bm_pw"))) {
-					result = boardMDao.boardDelete(pmap);
-					boardSDao.boardDelete(pmap);
-				}
-			}
-		}
+		result = boardMDao.boardDelete(pmap);
+		boardFileDelete(pmap);
 		return result;
 	}
-
+	public int boardFileDelete(Map<String, Object> pmap) {
+		int result = 0;
+			try {
+				String filePath = "C://portfolio_hit//lab_spring4//spring4_1_1//WebContent//pds//";
+				String filename = pmap.get("bs_file").toString();
+				String fullName = filePath + filename;
+				File file = new File(fullName);
+				if(file != null) {
+					if(file.exists()) {
+						boolean isOk = file.delete();
+					}
+				}
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			}
+		return result;
+	}
+	public boolean boardFileManagerDelete(Map<String, Object> pmap) {
+		int result = 0;
+		boolean isOk = false;
+		logger.info("filedelete ====================== " + pmap);
+		String bs_files = (String)pmap.get("bs_file").toString();
+		StringTokenizer st = new StringTokenizer(bs_files, "*");
+		while(st.hasMoreTokens()) {
+			try {
+				String filePath = "C://portfolio_hit//lab_spring4//spring4_1_1//WebContent//pds//";
+				String filename = st.nextToken();
+				String fullName = filePath + filename;
+				File file = new File(fullName);
+				if(file != null) {
+					if(file.exists()) {
+						if(file.delete()) {
+							result++;
+						}
+	//					pmap.put("bs_seq", 1);
+	//					boardSDao.boardSDelete(pmap);
+					}
+				}
+				isOk = true;
+			}
+			catch (Exception e) {
+				isOk = false;
+			}
+		}
+		isOk = true;
+		return isOk;
+	}
 	public int boardManagerDelete(Map<String, Object> pmap) {
 		int result = 0;
-		int subresult = 0;
+		boolean fileresult = false;
 //		List<Map<String, Object>> subList = new ArrayList<>();
 //		subList = boardSDao.boardFileNoSelect(pmap);
 		result = boardMDao.boardManagerDelete(pmap);
+		logger.info("filedelete ====================== " + pmap);
+		fileresult = boardFileManagerDelete(pmap);
 //		subresult = boardSDao.boardManagerDelete(subList);
 //		subresult = boardSDao.boardManagerDelete(pmap);
-//		if(result == 1 && subresult == 1) {
-//			result = 1; 
-//		}
-//		else {
-//			result = 0;
-//		}
+		if(result == 1 && fileresult) {
+			result = 1; 
+		}
+		else {
+			result = 0;
+		}
+		logger.info("boardManagerDelete Logic =============== " + result);
 		return result;
 	}
 

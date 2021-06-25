@@ -36,48 +36,37 @@ if (boardDetail != null && boardDetail.size() > 0) {
 }
 %>
 <script>
-function addAction(){
-// 		$("#f_boardAdd").attr("method","post");
-// 		$("#f_boardAdd").attr("enctype","multipart/form-data");
+	function addAction(){
 		$("#f_boardAdd").attr("action","./boardInsert.sp4");
 		$("#f_boardAdd").submit();
-		//부모창에 함수를 호출할때 opener.함수명();
-		//opener.boardList();
-		//self.close();
 	}
 	function updateForm(){
-		//alert("updateForm 호출 성공");
-// 		$('#d_boardUpd').dialog({
-// 			title:'글수정'
-// 		  ,width:720
-// 		  ,height:450
-// 		  ,closed:false
-// 		  ,cache:false
-// 		 ,modal:true	  
-// 		});		
-		$('#f_detail').attr("method", "post");
-		$('#f_detail').attr("action", "./boardUpdate.sp4");
-		$('#f_detail').submit();
-		//$('#d_boardUpd').dialog('open');	
-		//$('#d_boardUpd').dialog('refresh', '');
+		const imsi = $('#bs_file').val();
+		if($('#bm_pw_user').textbox('getValue') == <%=rb_pwd%>)
+		{
+		if(imsi.trim() == '해당없음'){
+		}
+		   $('#f_detail').attr("method", "post");
+		   $('#f_detail').attr("action", "./boardUpdate.sp4");		
+		   $('#f_detail').submit();
+		}
+		else{
+			$('#bm_pw_user').textbox('setValue','');
+			alert('비밀번호를 확인해주세요');
+		}
 	}
-	//글삭제하기 이벤트 처리
 	function boardDelView(){
 		alert("boardDelView호출 성공");
-// 		  $('#d_boardDel').dialog({
-// 			    title: '글삭제',
-// // 			    buttons: btn_boardDel,
-// 			    width: 420,
-// 			    height: 250,
-// 			    closed: true,
-// 			    cache: false,
-<%-- 			    href: "./boardDelete.sp4?bm_no=<%=rb_no%>&bm_pw=<%=rb_pwd%>" , --%>
-// 			    modal: true
-// 	   }); 	
-	   $('#f_detail').attr("method", "post");		
-	   $('#f_detail').attr("action", "./boardDelete.sp4");		
-	   $('#f_detail').submit();
-// 	   $('#d_boardDel').dialog('open');		
+		if($('#bm_pw_user').textbox('getValue') == <%=rb_pwd%>)
+		{
+		   $('#f_detail').attr("method", "post");
+		   $('#f_detail').attr("action", "./boardDelete.sp4");		
+		   $('#f_detail').submit();
+		}
+		else{
+			$('#bm_pw_user').textbox('setValue','');
+			alert('비밀번호를 확인해주세요');
+		}
 	}
 	//댓글쓰기
 	function repleForm() {
@@ -87,31 +76,4 @@ function addAction(){
 		location.href = "./getBoardList.sp4";
 	}
 	
-	//글삭제 화면에서 확인 버튼을 클릭했을 때
-	function boardDel(){
-		var db_pw = <%=rb_pwd %>
-		var u_pw = $("#u_pw").textbox('getValue');
-		//alert("db_pw:"+db_pw+", u_pw:"+u_pw);
-		//alert("사용자가 입력한 비번:"+$("#db_pw").textbox('getValue'));
-		//사용자가 입력한 비번과 DB에서 읽어온 비번을 비교하여
-		//일치하면 삭제 처리 진행하고
-		//불일치하면 비번을 다시 입력받도록 해주세요.
-		if(u_pw==db_pw){
-			//alert("같다");
-			$.messager.confirm('Confirm','정말 삭제하시겠습니까?',function(r){
-			 //r:true-ok, false-cancel
-				if (r){//자바스크립트는 0이면 false 나머지 true
-			    	location.href="./boardList.mvc?crud=del&bm_no=<%=rb_no%>&bs_file=<%=rb_file%>";    
-			    }
-			});
-		}else{
-			$("#db_pw").textbox('setValue','');
-		}
-	}
-	function boardDelClose(){
-		 $('#d_boardDel').dialog('close');
-	}
-// 	function boardList(){
-// 		location.href="/board/boardList.jsp";
-// 	}
 </script>

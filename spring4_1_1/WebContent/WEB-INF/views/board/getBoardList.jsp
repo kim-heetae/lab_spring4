@@ -65,39 +65,41 @@
 		}
 	}
 	function boardDel(){
-		console.log('삭제');
-// 		$('#dg_board').datagrid({
-			const rows_no = $('#dg_board').datagrid('getSelections');
-			let row_no = "";
-			for(let i = 0; i < rows_no.length; i++){
-				if(i != rows_no.length - 1){
-					row_no = row_no + rows_no[i].BM_NO.trim() + "cutter";					
-				}
-				else{
-					row_no = row_no + rows_no[i].BM_NO.trim();										
+		const rows_no = $('#dg_board').datagrid('getSelections');
+		let row_no = "";
+		for(let i = 0; i < rows_no.length; i++){
+			if(i != rows_no.length - 1){
+				row_no = row_no + rows_no[i].BM_NO.trim() + "cutter";					
+			}
+			else{
+				row_no = row_no + rows_no[i].BM_NO.trim();										
+			}
+		}
+		const rows_file = $('#dg_board').datagrid('getSelections');
+		let row_file = "";
+		for(let i = 0; i < rows_file.length; i++){
+			if(i != rows_file.length - 1){
+				let afile = rows_file[i].BS_FILE.trim();
+				afile = (((afile||'').split('>')[1])||'').split('<')[0];
+				if(afile != ''){
+					row_file = row_file + afile + "*";						
+					alert('1' + afile);
 				}
 			}
-			const rows_file = $('#dg_board').datagrid('getSelections');
-			let row_file = "";
-			for(let i = 0; i < rows_file.length; i++){
-				if(i != rows_file.length - 1){
-					let afile = rows_file[i].BS_FILE.trim();
-					afile = (((afile||'').split('>')[1])||'').split('<')[0];
-					if(afile != ''){
-						row_file = row_file + afile + "cutter";						
-						alert('1' + afile);
-					}
-				}
-				else{
-					let afile = rows_file[i].BS_FILE.trim();
-					afile = (((afile||'').split('>')[1])||'').split('<')[0];
-					if(afile != ''){
-						row_file = row_file + afile;						
-						alert('2' + afile);
-					}
+			else{
+				let afile = rows_file[i].BS_FILE.trim();
+				afile = (((afile||'').split('>')[1])||'').split('<')[0];
+				if(afile != ''){
+					row_file = row_file + afile;						
+					alert('2' + afile);
 				}
 			}
+		}
+		$.messager.confirm('삭제하시겠습니까?', '정말 삭제하시겠습니까?', function(r){
+            if (r){
 				location.href ='./boardManagerDelete.sp4?bm_no=' + row_no + '&bs_file=' + row_file 
+            }
+        });
 // 		});				
 	}
 	function boardsubmit(){
@@ -188,7 +190,7 @@
             <%
     			}
             %>
-            <a href="./getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO") %>" style= "text-decoration:none;"><%=rmap.get("BM_TITLE") %></a></td>
+            <a href="./getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO") %>&bs_file=<%=rmap.get("BS_FILE") %>" style= "text-decoration:none;"><%=rmap.get("BM_TITLE") %></a></td>
             <td><%=rmap.get("BM_DATE") %></td>
             <%
             	if(!rmap.get("BS_FILE").equals("해당없음")){

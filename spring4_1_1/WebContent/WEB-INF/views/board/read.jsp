@@ -47,6 +47,8 @@ if (boardDetail != null && boardDetail.size() > 0) {
 <form id = "f_detail" enctype="multipart/form-data">
 <input type="hidden" name="bm_no" value="<%=rb_no%>"> 
 <input type="hidden" name="bm_group" value="<%=rb_group%>"> 
+<input type="hidden" name="bs_file" value="<%=rb_file%>"> 
+<input type="hidden" name="bm_pw" value="<%=rb_pwd%>"> 
 	<table align="center" id="p" class="easyui-panel" title="글상세보기 [WEB_INF]" data-options="footer:'#tb_read'" style="width: 670px; height: 380px; padding: 10px; background: #fafafa;">
 		<tr>
 			<td>제목</td>
@@ -73,9 +75,15 @@ if (boardDetail != null && boardDetail.size() > 0) {
 			</td>
 		</tr>
 		<tr>
+			<td>첨부파일</td>
+			<td>
+				<input id="bs_file_upd" value="<%=rb_file%>" name="bs_file" class="easyui-filebox" data-options="width:'450px'">
+	    	</td>
+	   	</tr>
+		<tr>
 			<td>비밀번호</td>
 			<td>
-				<input id="bm_pw" value="" name="bm_pw" class="easyui-passwordbox">
+				<input id="bm_pw_user" value="" name="bm_pw" class="easyui-passwordbox">
 			</td>
 		</tr>
 	</table>
